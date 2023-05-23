@@ -1,6 +1,7 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: %i[ show edit update destroy ]
 
+  load_and_authorize_resource
   # GET /foods or /foods.json
   def index
     @foods = Food.all
@@ -8,6 +9,7 @@ class FoodsController < ApplicationController
 
   # GET /foods/1 or /foods/1.json
   def show
+    @food
   end
 
   # GET /foods/new
@@ -35,17 +37,17 @@ class FoodsController < ApplicationController
   end
 
   # PATCH/PUT /foods/1 or /foods/1.json
-  def update
-    respond_to do |format|
-      if @food.update(food_params)
-        format.html { redirect_to food_url(@food), notice: "Food was successfully updated." }
-        format.json { render :show, status: :ok, location: @food }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @food.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @food.update(food_params)
+  #       format.html { redirect_to food_url(@food), notice: "Food was successfully updated." }
+  #       format.json { render :show, status: :ok, location: @food }
+  #     else
+  #       format.html { render :edit, status: :unprocessable_entity }
+  #       format.json { render json: @food.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /foods/1 or /foods/1.json
   def destroy
@@ -65,6 +67,8 @@ class FoodsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def food_params
-      params.require(:food).permit(:name, :measurement_unit, :price, :quantity)
+     food = params.require(:food).permit(:name, :measurement_unit, :price, :quantity)
+     food[:user_id] = current_user.id
+     food
     end
 end
