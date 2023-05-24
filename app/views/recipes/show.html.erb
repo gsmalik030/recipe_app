@@ -22,6 +22,12 @@
   </div>
 
   <div>
+  <button>
+    <%= link_to 'General Shopping list', general_shopping_list_index_path(@food_recipe.recipe.id) %>
+    </button>
+  </div>
+
+  <div>
     <button>
     <%= link_to 'Add ingredient', new_food_recipe_path(@food_recipe.recipe.id) %>
     </button> 
