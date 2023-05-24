@@ -8,7 +8,10 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1 or /recipes/1.json
   def show
+    @recipe = Recipe.find(params[:id])
+    @food_recipe = FoodRecipe.new(recipe: @recipe)
   end
+  
 
   # GET /recipes/new
   def new
@@ -20,9 +23,22 @@ class RecipesController < ApplicationController
   end
 
   # POST /recipes or /recipes.json
+  # def create
+  #   @recipe = Recipe.new(recipe_params)
+
+  #   respond_to do |format|
+  #     if @recipe.save
+  #       format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
+  #       format.json { render :show, status: :created, location: @recipe }
+  #     else
+  #       format.html { render :new, status: :unprocessable_entity }
+  #       format.json { render json: @recipe.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+
   def create
     @recipe = Recipe.new(recipe_params)
-
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
@@ -30,6 +46,7 @@ class RecipesController < ApplicationController
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
+        format.js { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -68,5 +85,9 @@ class RecipesController < ApplicationController
       recipe = params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
       recipe[:user_id] = current_user.id
       recipe
+    end
+
+    def food_recipe_params
+      params.require(:food_recipe).permit(:food_id, :recipe_id, :quantity)
     end
 end

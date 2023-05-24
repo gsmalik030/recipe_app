@@ -1,6 +1,62 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @recipe %>
+<section>
+  <h2><%= @recipe.name %></h2>
+
+  <div>
+    <p>Preparation time : <%= @recipe.preparation_time %></p>
+    <p>Public :</p>
+  <%= button_to  recipe_path(@recipe.id), :method => :patch do %>
+      <% if @recipe.public %>
+      <% end %>
+      <% if !@recipe.public %>
+        
+      <% end %>
+    <% end %>
+  </div>
+  <div>
+    <p>Cooking time : <%= @recipe.cooking_time %></p>
+  </div>
+  <div>
+    <p>Steps goes here ...</p>
+  </div>
+
+  <div>
+    <button>
+    <%= link_to 'Add ingredient', new_food_recipe_path(@food_recipe.recipe.id) %>
+    </button> 
+   </div>
+   <hr>
+   <table>
+    <thead>
+      <tr>
+        <th scope="col">Food</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Value</th>
+        <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    <% @recipe.food_recipes.each do |food_recipe| %>
+      <tr>
+        <th scope="row"><%= food_recipe.food.name %></th>
+        <td> <%= food_recipe.food.measurement_unit %> </td>
+        <td> $<%= food_recipe.food.price*food_recipe.quantity %></td>
+        <td> 
+        <% if can? :destroy, @recipe %>
+        <div>
+          <%= button_to "Remove", food_recipe, method: :delete %>
+          <%= link_to "Edit", edit_food_recipe_path(food_recipe) %>
+        </div>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+   </tbody>
+  </table>
+</section>
+
 
 <div>
   <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
