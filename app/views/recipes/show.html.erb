@@ -23,7 +23,7 @@
 
   <div>
     <button>
-      <%= link_to 'Add ingredient', new_food_recipe_path(@food_recipe.recipe.id)%>
+    <%= link_to 'Add ingredient', new_food_recipe_path(@food_recipe.recipe.id) %>
     </button> 
    </div>
    <hr>
@@ -42,12 +42,12 @@
       <tr>
         <th scope="row"><%= food_recipe.food.name %></th>
         <td> <%= food_recipe.food.measurement_unit %> </td>
-        <td> $<%= food_recipe.food.unit_price*food_recipe.quantity %></td>
+        <td> $<%= food_recipe.food.price*food_recipe.quantity %></td>
         <td> 
         <% if can? :destroy, @recipe %>
         <div>
-          <%= link_to "Modify", edit_recipe_food_recipe_path(@recipe.id, food_recipe.id), class: "" %> 
-          <%= button_to "Remove", recipe_food_recipe_path(@recipe.id, food_recipe.id), :method => :delete %>
+          <%= button_to "Remove", food_recipe, method: :delete %>
+          <%= link_to "Edit", edit_food_recipe_path(food_recipe) %>
         </div>
         <% end %>
         </td>
