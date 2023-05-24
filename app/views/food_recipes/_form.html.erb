@@ -1,6 +1,6 @@
 <%= form_with(model: food_recipe) do |form| %>
   <% if food_recipe.errors.any? %>
-    <div style="color: red">
+    <div>
       <h2><%= pluralize(food_recipe.errors.count, "error") %> prohibited this food_recipe from being saved:</h2>
 
       <ul>
@@ -10,6 +10,11 @@
       </ul>
     </div>
   <% end %>
+
+     <div>
+    <%= form.label :food %><br>
+    <%= form.select :food_id, current_user.foods.map {|food| [food.name, food.id]},{ include_blank: true} %><br>
+    </div>
 
   <div>
     <%= form.label :quantity, style: "display: block" %>

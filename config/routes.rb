@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   end
   
   root 'users#index'
+
+  resources :recipes do
+    resources :food_recipes, only: [:new, :create]
+  end
   resources :food_recipes
   resources :recipes
   resources :foods
