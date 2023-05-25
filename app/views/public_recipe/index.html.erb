@@ -1,0 +1,24 @@
+<h1>Public Recipes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Recipe Name</th>
+      <th>Total Food Number</th>
+      <th>Total price</th>
+      <th>Recipe User Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @public_recipes.each do |recipe| %>
+    <% sum = 0  %>
+    <% recipe.food_recipes.each {|food| sum += food.quantity * food.food.price}%>
+      <tr>
+        <td><%= recipe.name %></td>
+        <td><%= recipe.food_recipes.count %></td>
+        <td><%= sum %></td>
+        <td><%= recipe.user.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
