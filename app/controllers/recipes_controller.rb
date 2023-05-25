@@ -22,21 +22,6 @@ class RecipesController < ApplicationController
   def edit
   end
 
-  # POST /recipes or /recipes.json
-  # def create
-  #   @recipe = Recipe.new(recipe_params)
-
-  #   respond_to do |format|
-  #     if @recipe.save
-  #       format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
-  #       format.json { render :show, status: :created, location: @recipe }
-  #     else
-  #       format.html { render :new, status: :unprocessable_entity }
-  #       format.json { render json: @recipe.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
   def create
     @recipe = Recipe.new(recipe_params)
     respond_to do |format|
@@ -91,5 +76,9 @@ class RecipesController < ApplicationController
 
     def food_recipe_params
       params.require(:food_recipe).permit(:food_id, :recipe_id, :quantity)
+    end
+
+    def public_recipes
+      @recipes = Recipe.where(public: true).includes(:user, :foods)
     end
 end

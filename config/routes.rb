@@ -24,4 +24,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  get 'public_recipes', to: 'public_recipe#index'
 end
