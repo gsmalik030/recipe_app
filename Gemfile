@@ -78,4 +78,3 @@ gem 'cancancan'
 gem 'devise'
 gem 'font-awesome-rails'
 gem 'font-awesome-sass'
-

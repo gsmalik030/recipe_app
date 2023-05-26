@@ -22,5 +22,3 @@ Rails.application.routes.draw do
 
   get 'public_recipes', to: 'public_recipe#index'
 end
-
-
