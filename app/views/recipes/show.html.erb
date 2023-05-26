@@ -9,12 +9,11 @@
       <p class='sub-title'>Preparation time : <%= @recipe.preparation_time %></p>
       <div class='public-btn-flex'>
         <p class='sub-title'>Public :</p>
-        <%= button_to  recipe_path(@recipe.id), :method => :patch do %>
           <% if @recipe.public %>
+          <i class="fa fa-solid fa-toggle-on" style="font-size:28px;color:green"></i>
           <% end %>
           <% if !@recipe.public %>
-        
-          <% end %>
+          <i class="fa fa-solid fa-toggle-off" style="font-size:28px;color:red;border:none"></i>
           <% end %>
       </div>
     </div>
@@ -28,7 +27,7 @@
 
     <div class='bottom-butoons'>
     <%= link_to 'General Shopping list', general_shopping_list_index_path(@food_recipe.recipe.id), class: "shopping-link" %>
-    <%= link_to 'Add ingredient', edit_food_recipe_path(@food_recipe.recipe.id), class: "ingredient-link"%>
+    <%= link_to 'Add ingredient', new_food_recipe_path(@food_recipe.recipe.id), class: "ingredient-link"%>
     </div>
   </div>
    <hr>

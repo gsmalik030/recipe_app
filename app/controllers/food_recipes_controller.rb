@@ -11,15 +11,19 @@ class FoodRecipesController < ApplicationController
     @food_recipe = FoodRecipe.find(params[:id])
     @recipe = Recipe.find(@food_recipe.recipe_id)
   end
+  
+  
 
   # GET /food_recipes/new
   def new
     @food_recipe = FoodRecipe.new
-    # @recipe_id = params[:recipe_id]
+    @recipe_id = params[:recipe_id]
   end
 
   # GET /food_recipes/1/edit
-  def edit; end
+  def edit
+    @recipe_id = params[:recipe_id]
+  end
 
   # POST /food_recipes or /food_recipes.json
   def create
