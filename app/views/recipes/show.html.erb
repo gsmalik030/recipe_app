@@ -1,75 +1,73 @@
 <p style="color: green"><%= notice %></p>
 
 <section>
-  <h2><%= @recipe.name %></h2>
+  <h2 class='recipe-name'><%= @recipe.name %></h2>
 
-  <div>
-    <p>Preparation time : <%= @recipe.preparation_time %></p>
-    <p>Public :</p>
-  <%= button_to  recipe_path(@recipe.id), :method => :patch do %>
-      <% if @recipe.public %>
-      <% end %>
-      <% if !@recipe.public %>
+  <div class='recipe-main'>
+    
+    <div class='public-btn-div'>
+      <p class='sub-title'>Preparation time : <%= @recipe.preparation_time %></p>
+      <div class='public-btn-flex'>
+        <p class='sub-title'>Public :</p>
+        <%= button_to  recipe_path(@recipe.id), :method => :patch do %>
+          <% if @recipe.public %>
+          <% end %>
+          <% if !@recipe.public %>
         
-      <% end %>
-    <% end %>
-  </div>
-  <div>
-    <p>Cooking time : <%= @recipe.cooking_time %></p>
-  </div>
-  <div>
-    <p>Steps goes here ...</p>
-  </div>
+          <% end %>
+          <% end %>
+      </div>
+    </div>
+    <div>
+    <p class='sub-title'>Cooking time : <%= @recipe.cooking_time %></p>
+    </div>
 
-  <div>
-  <button>
-    <%= link_to 'General Shopping list', general_shopping_list_index_path(@food_recipe.recipe.id) %>
-    </button>
-  </div>
+    <div>
+    <p class='sub-title'>Steps goes here ...</p>
+    </div>
 
-  <div>
-    <button>
-    <%= link_to 'Add ingredient', edit_food_recipe_path(@food_recipe.recipe.id) %>
-    </button> 
-   </div>
+    <div class='bottom-butoons'>
+    <%= link_to 'General Shopping list', general_shopping_list_index_path(@food_recipe.recipe.id), class: "shopping-link" %>
+    <%= link_to 'Add ingredient', edit_food_recipe_path(@food_recipe.recipe.id), class: "ingredient-link"%>
+    </div>
+  </div>
    <hr>
-   <table>
-    <thead>
-      <tr>
-        <th scope="col">Food</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Value</th>
-        <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
+   <table class="recipe-table">
+   <thead class="table-thead">
+       <tr>
+           <th class="table-heading" scope="col">Food</th>
+           <th class="table-heading" scope="col">Quantity</th>
+           <th class="table-heading" scope="col">Value</th>
+           <th class="table-heading" scope="col">Actions</th>
+       </tr>
+   </thead>
+   <tbody>
 
-    <% @recipe.food_recipes.each do |food_recipe| %>
-      <tr>
-        <th scope="row"><%= food_recipe.food.name %></th>
-        <td> <%= food_recipe.food.measurement_unit %> </td>
-        <td> $<%= food_recipe.food.price*food_recipe.quantity %></td>
-        <td> 
-        <% if can? :destroy, @recipe %>
-        <div>
-          <%= button_to "Remove", food_recipe, method: :delete %>
-          <%= link_to "Edit", edit_food_recipe_path(food_recipe) %>
-        </div>
-        <% end %>
-        </td>
-      </tr>
-    <% end %>
+   <% @recipe.food_recipes.each do |food_recipe| %>
+       <tr>
+           <td><%= food_recipe.food.name %></td>
+           <td><%= food_recipe.food.measurement_unit %></td>
+           <td>$<%= food_recipe.food.price * food_recipe.quantity %></td>
+           <td>
+               <% if can? :destroy, @recipe %>
+               <div class="table-btn-div">
+                   <%= button_to "Remove", food_recipe, method: :delete, class: "remove-button" %>
+                   <%= link_to "Edit", edit_food_recipe_path(food_recipe), class: "edit-link" %>
+               </div>
+               <% end %>
+           </td>
+       </tr>
+   <% end %>
    </tbody>
-  </table>
+</table>
+
 </section>
 
 
-<div>
-  <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
-  <%= link_to "Back to recipes", recipes_path %>
-
-  <%= button_to "Destroy this recipe", @recipe, method: :delete %>
+<div class='bottom-links'>
+  <%= link_to "Edit this recipe", edit_recipe_path(@recipe), class: 'green-btn' %> |
+  <%= button_to "Destroy this recipe", @recipe, method: :delete , class: 'red-btn'%>
 </div>
-
+<%= link_to "Back to recipes", recipes_path, class: 'back-link' %>
 
 
