@@ -165,6 +165,7 @@ table tbody tr:hover {
         text-transform: uppercase;
         letter-spacing: 2px;
         color: #916953;
+        text-align: center;
     }
 
     .public-btn-div{
