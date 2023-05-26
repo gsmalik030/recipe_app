@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1 class='recipe-name'>Users</h1>
+
+<div id="users">
+  <% @users.each do |user| %>
+    <div class='user-card'>
+    <%= render user %>
+    <p class='user-link'>
+      <%= link_to "Show this user", user, class: 'green-btn' %>
+    </p>
+    </div>
+  <% end %>
+</div>

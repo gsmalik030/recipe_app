@@ -1,0 +1,29 @@
+<h2 class='recipe-name'>Shopping list</h2>
+<div class='shopping-list-flex'>
+    <h6>Amount of food items : <span> <%= @ingredients.count%></span></h6>
+    <h6>Total Value: <% sum = 0%>
+    <%@ingredients.each {|food_recipe| sum += Food.find(food_recipe.food_id).price * food_recipe.quantity}%>
+    <span><%= "$#{sum}" %></span>
+    </h6>
+</div>
+<div class='table-setting'>
+<table> 
+<thead>
+<tr>
+<th>Food</th>
+<th>Quantity</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody>
+<% @ingredients.each do |food_recipe|%>
+<% food = Food.find(food_recipe.food_id)%>
+<tr>
+<td><%= food.name %></td>
+<td><%= food_recipe.quantity %> <%= food.measurement_unit%></td>
+<td><%= food.price * food_recipe.quantity %></td>
+</tr>
+<%end%>
+</tbody>
+</table>
+</div>

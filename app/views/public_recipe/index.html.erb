@@ -1,0 +1,29 @@
+<h1 class='recipe-name'>Public Recipes</h1>
+
+<% @public_recipes.each do |recipe| %>
+  <% sum = 0  %>
+  <% recipe.food_recipes.each {|food| sum += food.quantity * food.food.price}%>
+    <div class='public-flex'>
+      <div>
+        <p class='recipe-name'>
+        <%= recipe.name %>
+        </p>
+        <p>
+        <strong class='sub-title'>By:</strong>
+        <%= content_tag(:span, recipe.user.name, class: "sub-title") %>
+        </p>
+      </div>
+      <div class='pos'>
+        <p>
+        <strong class='sub-title '>Total food Item:</strong>
+        <%= content_tag(:span, recipe.food_recipes.count, class: "sub-title") %>
+        </p>
+        <p>
+        <strong class='sub-title'>Total Price:$</strong>
+        <%= content_tag(:span, sum, class: "sub-title") %>
+        </p>
+        <%= link_to "Show this recipe", recipe, class: 'link'%>
+      </div>
+      
+    </div>
+  <% end %>

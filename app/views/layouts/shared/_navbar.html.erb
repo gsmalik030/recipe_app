@@ -1,0 +1,23 @@
+<div class='navbar'>
+    <h2>Recipe Application</h2>
+    <div class='sign'>
+        <% if user_signed_in? %>
+        <div class='menu'>
+        <ul>
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Recipes", recipes_path %></li>
+            <li><%= link_to "Users", users_path %></li>
+            <li><%= link_to "Foods", foods_path %></li>
+            <li><%= link_to "Public recipes", public_recipes_path %></li>
+            
+        </ul>
+    </div>
+          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class:'sign_out' %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path, class:'sign_in' %> |
+          <%= link_to "Sign up", new_user_registration_path, class:'sign_up' %>
+        <% end %>
+    </div>
+    
+</div>
+  

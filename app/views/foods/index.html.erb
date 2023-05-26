@@ -1,0 +1,32 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Foods</h1>
+
+<div>
+<%if user_signed_in?%>
+<%= link_to "Add food", new_food_path, class: 'green-btn add-food' %>
+<%end%>
+</div>
+
+<% if @foods.exists? %>
+<table>
+<thead>
+<td>Food</td>
+<td>Measurement Unit</td>
+<td>Unit Price</td>
+<td>Actions</td>
+</thead>
+<%@foods.each do |food|%>
+<tr>
+<td><%= food.name%></td>
+<td><%= food.measurement_unit%></td>
+<td><%= food.price%></td>
+<td><%= button_to "Delete", food_path(food.id), method: :delete %></td>
+</tr>
+<%end%>
+</table>
+<% else %>
+<p>No Food yet</p>
+<%end%>
+
+
