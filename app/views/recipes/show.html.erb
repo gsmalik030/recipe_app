@@ -9,12 +9,14 @@
       <p class='sub-title'>Preparation time : <%= @recipe.preparation_time %></p>
       <div class='public-btn-flex'>
         <p class='sub-title'>Public :</p>
-          <% if @recipe.public %>
-          <i class="fa fa-solid fa-toggle-on" style="font-size:28px;color:green"></i>
-          <% end %>
-          <% if !@recipe.public %>
-          <i class="fa fa-solid fa-toggle-off" style="font-size:28px;color:red;border:none"></i>
-          <% end %>
+  <%= button_to  recipe_path(@recipe.id), :method => :patch, class: "align-self-end" do %>
+      <% if @recipe.public %>
+        <i class="fa fa-solid fa-toggle-on" style="font-size:28px;color:green"></i>
+      <% end %>
+      <% if !@recipe.public %>
+         <i class="fa fa-solid fa-toggle-off" style="font-size:28px;color:red;border:none"></i>
+      <% end %>
+    <% end %>
       </div>
     </div>
     <div>

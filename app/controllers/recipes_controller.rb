@@ -36,15 +36,15 @@ class RecipesController < ApplicationController
 
   # PATCH/PUT /recipes/1 or /recipes/1.json
   def update
-    respond_to do |format|
-      if @recipe.update(recipe_params)
-        format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully updated.' }
-        format.json { render :show, status: :ok, location: @recipe }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
-      end
+    @recipe = Recipe.find(params[:id])
+    if @recipe.public
+      @recipe.update(public: false)
+      flash[:notice] = 'You have update the recipe status to private'
+    else
+      @recipe.update(public: true)
+      flash[:notice] = 'You have update the recipe status to public'
     end
+    redirect_to recipes_path
   end
 
   # DELETE /recipes/1 or /recipes/1.json
